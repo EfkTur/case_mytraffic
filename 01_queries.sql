@@ -17,14 +17,6 @@ CREATE MATERIALIZED VIEW sorted_dataset AS (
 		device_hash
 );
 
---Showing the number of pings for each shopping center. Note that the 4th shopping center has much more pings
-SELECT
-	shopping_center_id, count(*)
-FROM 
-	sorted_dataset
-GROUP BY 
-	shopping_center_id;
-
 --Creating the day and hours column
 ALTER TABLE visits
 ADD COLUMN days INTEGER;
@@ -60,7 +52,7 @@ ALTER TABLE visits
 ADD COLUMN ping_hour INTEGER;
 
 UPDATE visits
-SET ping_hour = EXTRACT(HOUR FROM datetime_utc)
+SET ping_hour = EXTRACT(HOUR FROM datetime_utc);
 
 --Putting shopping center names in simpler formats
 UPDATE visits
